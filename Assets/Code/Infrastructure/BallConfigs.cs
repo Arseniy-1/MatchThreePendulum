@@ -13,5 +13,10 @@ namespace Code
         {
             return _ballsData.ToDictionary(x => x.Type, x => x.Color);
         }
+        
+        public List<BallTypes> GetBallTypes()
+        {
+            return _ballsData.Select(x => x.Type).ToList();
+        }
     }
 }
