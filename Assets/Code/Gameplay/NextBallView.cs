@@ -7,7 +7,7 @@ namespace Code.Gameplay
     {
         private SpriteRenderer _spriteRenderer;
 
-        private void Awake()
+        public void Initialize()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }

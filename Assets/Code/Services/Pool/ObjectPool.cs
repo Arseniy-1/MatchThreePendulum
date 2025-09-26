@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Code.Services.Pool
 {
     [Serializable]
-    public class Pool<T> where T : MonoBehaviour
+    public class Pool<T> where T : MonoBehaviour, IDestoyable<T>
     {
         private int _startCount;
 
-        protected Stack<T> Stack { get; private set; } = new ();
+        protected Stack<T> Stack { get; private set; } = new();
+        protected IFactory<T> Factory { get; private set; }
 
-        public Pool(int startCount)
+        public Pool(IFactory<T> factory, int startCount)
         {
+            Factory = factory;
             _startCount = startCount;
 
             CreateStartCount();
@@ -21,7 +24,7 @@ namespace Code.Services.Pool
 
         public void Release(T template)
         {
-            template.gameObject.SetActive(false); 
+            template.gameObject.SetActive(false);
             Stack.Push(template);
         }
 
@@ -32,7 +35,7 @@ namespace Code.Services.Pool
                 Stack.Push(Create());
                 template = Stack.Pop();
             }
-        
+
             template.gameObject.SetActive(true);
 
             return template;
@@ -40,12 +43,12 @@ namespace Code.Services.Pool
 
         protected T Create()
         {
-            var enemy = Object.Instantiate(Prefab);
+            var enemy = Factory.Create();
             enemy.gameObject.SetActive(false);
 
             return enemy;
         }
-        
+
         private void CreateStartCount()
         {
             for (int i = 0; i < _startCount; i++)

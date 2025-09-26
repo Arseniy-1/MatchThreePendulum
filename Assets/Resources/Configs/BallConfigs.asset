@@ -15,7 +15,10 @@ MonoBehaviour:
   _ballsData:
   - <Type>k__BackingField: 1
     <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+    <Price>k__BackingField: 1000
   - <Type>k__BackingField: 2
-    <Color>k__BackingField: {r: 0.020617366, g: 1, b: 0, a: 1}
+    <Color>k__BackingField: {r: 0, g: 1, b: 0.012152195, a: 1}
+    <Price>k__BackingField: 700
   - <Type>k__BackingField: 3
     <Color>k__BackingField: {r: 0, g: 0.04313898, b: 1, a: 1}
+    <Price>k__BackingField: 500

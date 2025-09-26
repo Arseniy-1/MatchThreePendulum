@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Infrastructure;
 using UnityEngine;
 
 namespace Code.Gameplay
@@ -31,13 +32,12 @@ namespace Code.Gameplay
                 return;
             
             _hookedBall.Rigidbody.isKinematic = false;
-            _hookedBall.transform.parent = _collider.transform;
             
             _hookedBall.Destroy();
             _hookedBall = null;
         }
 
-        private void HookBall(Ball ball)
+        public void HookBall(Ball ball)
         {
             _hookedBall = ball;
          
@@ -50,9 +50,11 @@ namespace Code.Gameplay
             
             _hookedBall.transform.position = _collider.transform.position;
             _hookedBall.transform.rotation = _collider.transform.rotation;
-            _hookedBall.transform.parent = _collider.transform;
             
             BallHooked?.Invoke(this, _hookedBall.BallType);
         }
+
+        public Ball GetBall() => 
+            _hookedBall;
     }
 }

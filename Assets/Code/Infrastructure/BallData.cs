@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code
+namespace Code.Infrastructure
 {
     [Serializable]
     public struct BallData
@@ -14,5 +14,9 @@ namespace Code
         [field: SerializeField]
         [field: HideLabel] 
         [field: HorizontalGroup] public Color Color { get; private set; }
+        
+        [field: SerializeField]
+        [field: HideLabel] 
+        [field: HorizontalGroup] public int Price { get; private set; }
     }
 }

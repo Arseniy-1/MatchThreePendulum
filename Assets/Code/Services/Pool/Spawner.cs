@@ -14,9 +14,9 @@ namespace Code.Services.Pool
         
         [field: SerializeField] protected int StartAmount { get; private set; } = 0;
 
-        public Spawner(Transform parent = null)
+        public Spawner(IFactory<T> factory, Transform parent = null)
         {
-            Pool = new Pool<T>(StartAmount);
+            Pool = new Pool<T>(factory, StartAmount);
             _parent = parent;
         }
 
