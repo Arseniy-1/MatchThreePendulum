@@ -10,12 +10,10 @@ namespace Code.Services.Pool
     {
         private int _startCount;
 
-        protected T Prefab { get; private set; }
         protected Stack<T> Stack { get; private set; } = new ();
 
-        public Pool(T prefab, int startCount)
+        public Pool(int startCount)
         {
-            Prefab = prefab;
             _startCount = startCount;
 
             CreateStartCount();
@@ -54,54 +52,6 @@ namespace Code.Services.Pool
             {
                 Create();
             }
-        }
-    }
-    
-    [Serializable]
-    public class Spawner<T> where T : MonoBehaviour, IDestoyable<T>
-    {
-        protected T Prefab { get; private set; }
-        protected Pool<T> Pool { get; private set; }
-
-        private List<T> _spawned = new();
-        private Transform _parent;
-        
-        [field: SerializeField] protected int StartAmount { get; private set; } = 0;
-
-        public Spawner(T prefab, Transform parent = null)
-        {
-            Prefab = prefab;
-            Pool = new Pool<T>(prefab, StartAmount);
-            _parent = parent;
-        }
-
-        public void DisableSpawned()
-        {
-            for (int i = _spawned.Count - 1; i >= 0; i--)
-            {
-                _spawned[i].Die();
-            }
-        }
-
-        public T Spawn()
-        {
-            T spawnedObject = Pool.Get();
-
-            spawnedObject.Destroyed += OnDestroyed;
-            _spawned.Add(spawnedObject);
-            
-            if(_parent != null)
-                spawnedObject.transform.SetParent(_parent);
-            
-            return spawnedObject;
-        }
-
-        protected void OnDestroyed(T spawnableObject)
-        {
-            spawnableObject.Destroyed -= OnDestroyed;
-            _spawned.Remove(spawnableObject);
-
-            Pool.Release(spawnableObject);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Code.Gameplay;
 using UnityEngine;
 
-namespace Code
+namespace Code.Services
 {
     public interface IBallFactory
     {

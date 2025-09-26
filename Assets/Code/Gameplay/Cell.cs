@@ -33,6 +33,7 @@ namespace Code.Gameplay
             _hookedBall.Rigidbody.isKinematic = false;
             _hookedBall.transform.parent = _collider.transform;
             
+            _hookedBall.Destroy();
             _hookedBall = null;
         }
 
